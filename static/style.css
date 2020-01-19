@@ -1,5 +1,5 @@
 table {
-    height: 200px;
+    /* height: 200px; */
     display: inline-block;
     border: 1px solid black;
 }
@@ -20,12 +20,14 @@ table {
 }
 
 #messages {
+    height: 200px;
     width: 70%;
 }
 
 #users {
-    overflow-y: scroll;
+    height: 200px;
     width: 20%;
+    overflow-y: scroll;
 }
 
 input {
