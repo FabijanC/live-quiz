@@ -1,8 +1,31 @@
 table {
-    overflow-y: scroll;
     height: 200px;
-    width: 200px;
     display: inline-block;
+    border: 1px solid black;
+}
+
+#question {
+    font-size: large;
+    /* height: 20px; */
+    display:inline;
+}
+
+#revealed {
+    text-align: left;
+    display:inline;
+}
+
+#answer {
+    width: 300px;
+}
+
+#messages {
+    width: 70%;
+}
+
+#users {
+    overflow-y: scroll;
+    width: 20%;
 }
 
 input {

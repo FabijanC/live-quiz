@@ -31,24 +31,33 @@ if (!("WebSocket" in window || "MozWebSocket" in window)) {
     };
 
     ws.onmessage = (msg) => {
-        data = JSON.parse(msg.data);
+        const data = JSON.parse(msg.data);
         if (data.type === "question") {
             console.log("new q: " + data.content);
+            add_new_message(`[PITANJE] ${data.content}`);
             $("#question").html(data.content);
             $("#revealed").text("");
 
         } else if (data.type === "answer") {
-            console.log("answer received");
-            add_new_message(data.content);
+            console.log("answer received ");
+            console.log(data);
+            
+            const author_txt = (data.author === null) ? "Nitko ne zna" : data.author;
+            const rounded = parseFloat(data.time).toFixed(2);
+            const time_txt = data.time ? `(${rounded} s)` : "";
+            add_new_message(`[ODGOVOR] ${author_txt}: ${data.content} ${time_txt}`);
             $("#revealed").text(data.content);
             
         } else if (data.type === "message") {
-            add_new_message(data.content);
+            add_new_message(`${data.author}: ${data.content}`);
 
         } else if (data.type === "users") {
             users = data.content;
+            users.sort((u1,u2) => u2.score - u1.score);
             $("#users").html(
-                `<caption>Players: ${users.length}</caption>` + users.map(u => `<tr><td>${u}</td></tr>`).join("")
+                `<caption>Online: ${users.length}</caption>` + users.map(
+                    u => `<tr><td>${u.name}</td><td>${u.score}</td></tr>`
+                ).join("")
             );
 
             let my_name_cell = $("#users td").filter(function() {
