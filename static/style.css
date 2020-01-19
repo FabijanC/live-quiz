@@ -3,12 +3,12 @@ table {
     height: 200px;
     width: 200px;
     display: inline-block;
- }
+}
 
- input {
-     display: block;
- }
+input {
+    display: block;
+}
 
- tbody tr:nth-child(odd) {
-     background-color: lightgrey;
- }
+/* tbody tr:nth-child(odd) {
+    background-color: lightgrey;
+} */

@@ -101,25 +101,39 @@ class QuestionEngine:
         self.last_time = time.time()
     
     async def pause_and_start_new(self, users):
-        current_question_time = self.last_time
-        self.start_new()
-        for _ in range(1000):
+        print("pause and start new")
+        for _ in range(50):
             await asyncio.sleep(0.1)
         
-        users.broadcast(type=MessageType.QUESTION, content=self.active_question)
-        for _ in range(1000):
+        self.start_new()
+        current_question_time = self.last_time # TODO before or after next line
+        
+        await users.broadcast(type=MessageType.QUESTION, content=self.active_question)
+        print("broadcasted question")
+        for _ in range(100):
             await asyncio.sleep(0.1)
             if self.last_time != current_question_time:
                 break
+        print(self.last_time, current_question_time)
+        msg = ("not" if self.last_time == current_question_time else "") + "answered"
+        print("sleeping done", msg)
+        if self.last_time == current_question_time:
+            await users.broadcast(type=MessageType.ANSWER, content="No one seems to know: " + self.active_answer)
+            print("restarting")
+            self.restart_active()
+            asyncio.get_event_loop().create_task(self.pause_and_start_new(users))
+
+    def restart_active(self):
+        self.active_question = None
+        self.active_answer = None
+        self.last_time = time.time()
 
     def attempt(self, guess):
         if self.active_answer is None:
             return False
         
         if guess == self.active_answer.lower():
-            self.active_question = None
-            self.active_answer = None
-            self.last_time = time.time()
+            self.restart_active()
             return True
 
 name_generator = NameGenerator(
@@ -133,12 +147,17 @@ async def main(websocket, path):
     await users.add(websocket)
     try:
         async for msg in websocket:
-            await users.broadcast(type=MessageType.MESSAGE, content=msg)
+            print("new msg:", msg)
             msg = msg.strip().lower()
             guessed = question_engine.attempt(msg)
             if guessed:
-                await users.broadcast(type=MessageType.ANSWER, content=question_engine.active_answer)
+                print(msg, "is correct!")
+                await users.broadcast(type=MessageType.ANSWER, content=msg + " is correct!")
+                print("broadcasted that q answered")
                 asyncio.get_event_loop().create_task(question_engine.pause_and_start_new(users))
+            else:
+                await users.broadcast(type=MessageType.MESSAGE, content=msg)
+                print(msg, "is not correct")
 
     finally:
         await users.remove(websocket)
@@ -146,7 +165,6 @@ async def main(websocket, path):
 start_server = websockets.serve(main, "localhost", 8765)
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    # loop.create_task(question_engine.start_new())
+    loop.create_task(question_engine.pause_and_start_new(users))
     loop.run_until_complete(start_server) # TODO try create_task even for this
     loop.run_forever()
-
