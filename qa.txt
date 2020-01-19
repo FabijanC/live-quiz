@@ -1,0 +1,4 @@
+Koja je kratica predmeta Računarstvo zasnovano na uslugama?	RZNU
+Uz manje korišteni URN, druga vrsta URI-ja je - koja?	URL
+Koji se arhitekturni stil zasniva na, kako mu i ime kaže, reprezentacijskom prijenosu stanja?	REST
+Koji je primarni jezik za pisanje skripata koje se vrte u browseru?	Javascript
