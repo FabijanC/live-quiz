@@ -1,9 +1,3 @@
-if (window.location.protocol == "https:") {
-    var ws_scheme = "wss://";
-} else {
-    var ws_scheme = "ws://"
-}
-
 const MAX_MESSAGES = 10;
 var messages = [];
 var my_name = "";
@@ -26,7 +20,8 @@ if (!("WebSocket" in window || "MozWebSocket" in window)) {
     document.write("WebSocket protocol not supported. Please upgrade to a modern browser.")
     window.stop();
 } else {
-    let ws = new WebSocket(ws_scheme + "localhost:8765");
+    const ws_scheme = window.location.protocol.replace("http", "ws");
+    let ws = new WebSocket(ws_scheme + "//" + window.location.hostname + ":8765");
     ws.onopen = (msg) => {
     };
 

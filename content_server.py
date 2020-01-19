@@ -1,7 +1,7 @@
 from flask import Flask
 
 app = Flask(__name__, static_folder="static")
-# app.config['SECRET_KEY'] = 'secret!'
+app.config['SECRET_KEY'] = 'secret!'
 @app.route("/")
 def root():
     return app.send_static_file("index.html")
