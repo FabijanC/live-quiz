@@ -1,4 +1,14 @@
-Koja je kratica predmeta Računarstvo zasnovano na uslugama?	RZNU
+Koja je kratica FER-ovog predmeta na kojem se stječe uvid u SOC?	RZNU
 Uz manje korišteni URN, druga vrsta URI-ja je - koja?	URL
 Koji se arhitekturni stil zasniva na, kako mu i ime kaže, reprezentacijskom prijenosu stanja?	REST
 Koji je primarni jezik za pisanje skripata koje se vrte u browseru?	Javascript
+Koja četveroslovna tehnologija omogućava slanje HTTP zahtjeva poslužitelju bez osvježavanja stranice?	AJAX
+Kako se zove jezična standardizacija čiji je Javascript svojevrsni dijalekt?	ECMAScript
+Koji se standard zapisa objekata iz jezika Javascript proširio i u druge programske jezike?	JSON
+Koja varijabla od jednog znaka omogućava poziv jQueryja?	$
+U SSE tehnologiji, koliko HTTP odgovora šalje poslužitelj za trajanja jedne veze? Odgovorite brojem.	1
+Kijent može inicirati SSE komunikaciju specificiranjem Accept:... što?	text/event-stream
+Koji protokol omogućava dvosmjernu komunikaciju porukama tekstualnog i binarnog sadržaja?	WebSocket
+Ime localhost najčešće se razrješava kao - koja IPv4 adresa?	127.0.0.1
+IPv6 za adresiranje koristi - koliko bitova?	128
+IPv4 za adresiranje koristi - koliko bitova?	32
