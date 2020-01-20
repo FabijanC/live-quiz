@@ -1,5 +1,5 @@
-const MAX_MESSAGES = 10;
-var messages = new Array(MAX_MESSAGES);
+const MAX_MESSAGES = 30;
+var messages = new Array(MAX_MESSAGES).fill("&nbsp;");
 var my_name = "";
 
 function add_new_message(msg) {
@@ -13,6 +13,8 @@ function add_new_message(msg) {
     $("#messages").html(
         messages.map(m => `<tr><td>${m}</td></tr>`).join("")
     );
+    
+    $("#messages").scrollTop($("#messages").height()*2);;
 }
 
 if (!("WebSocket" in window || "MozWebSocket" in window)) {

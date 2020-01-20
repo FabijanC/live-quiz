@@ -19,13 +19,21 @@ table {
     width: 300px;
 }
 
+#messages > td {
+    height: 20px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
 #messages {
-    height: 200px;
+    height: 300px;
+    table-layout: fixed;
     width: 70%;
+    overflow-y: scroll;
 }
 
 #users {
-    height: 200px;
+    height: 300px;
     width: 20%;
     overflow-y: scroll;
 }
